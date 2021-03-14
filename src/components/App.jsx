@@ -13,7 +13,7 @@ const App = (props)=>{
   useEffect(()=>{
     if(!loaded){
       // fetch("http://localhost:3001/users").then(
-      fetch("https://randomuser.me/api/?results=5000").then(
+      fetch("https://randomuser.me/api/?results=500&seed=abc").then(
         res=>res.json().then(
           data=>{
             setAllUsers(data.results);
@@ -26,11 +26,12 @@ const App = (props)=>{
   // eslint-disable-next-line
   },[])
 
-  return (
-    <>
+  return (<>
+    {loaded ? <>
       <Title title="Pesquisa de Usuários"/>
       <QueryBox userList={allUsers} handler={setUsers}/>
       <Results users ={users}/>
+      </>: <Title title="Carregando Usuários..."/> }
     </>
   )
 }
